@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searchbus</title>
+    <script src="https://kit.fontawesome.com/feaa59adcb.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/png" href="D:\2x\2x/NT.png" />
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: sans-serif; margin: 0; padding:
+            0; background-color: #0b0b0f;min-height: 100vh; }
+
+            nav{
+                color: white;
+                background-color: #1458a5;
+                /* background: linear-gradient(to right,rgb(0, 0, 0),rgb(63, 5, 5) ); */
+                width: 100%;
+                position: fixed;
+                top: 0;
+                display: flex;
+                justify-content: space-between;
+            }
+            nav img{
+                margin-left: 15px;
+                width: 10%;
+                height: 50%;
+            }
+            .search-container{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px   ;
+                padding: 10px;
+            }
+            input{
+                height: 40px;
+                background-color: rgba(255, 255, 255, 0.664);
+                outline: none;border: 1px solid white;
+                /* color: white; */
+                border-radius: 10px;
+            }
+            /* .search-container button{
+                width: 100%;
+                height: 40px;
+                border: 0;outline: none;
+                cursor: pointer;
+                background-color: rgb(255, 251, 0);padding: 10px;
+                border-radius: 10px;
+            } */
+            
+
+input {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /* color: white; */
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  background-color: #fffb00;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pay-button{
+  padding: 10px;
+  margin: 5px;
+  background-color: #199c15;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.review{
+  padding: 10px;
+  margin: 5px;
+  background-color: #ffae00;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.dropdown {
+  /* position: absolute;
+  top: 20%;
+  left: 0; */
+  margin-top: 8rem;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  background-color: #161827;
+  color: white  ;
+  z-index: 2;
+}
+
+.dropdown-item {
+  
+  padding: 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
+  display: block;
+}
+.dropdown-item li{
+  color: white;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #e0e0e0;
+  color: black;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+footer{
+    position: fixed;
+    bottom: 0;
+  color: white;
+    width: 100%;
+    height: auto;
+    background-color: #000000;
+}
+footer p{
+  text-align: center;
+}
+.review-popup{
+  background-color: #ecebe9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  z-index: 999;
+  /* box-shadow: 0px 0px 20px rgba(255, 210, 86, 0.836); */
+  border-radius: 10px;
+  padding: 20px;
+}
+.close-btn{
+  width: 100%;
+  cursor: pointer;
+  font-size: 20px;
+  float: right;
+}
+.star{
+  font-size:30px ;
+  cursor: pointer;
+  color: #ffae00;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+.review-textbox{
+  width: 100%;
+  position: relative;
+}
+.submit-btn{
+  background:linear-gradient(to right,red,orange);
+  color: white;
+  border: none;
+  padding: 10px;
+  display: block;justify-content: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.busname{
+  margin: 0;
+  width: 100%;text-align: center;
+}
+.writerev{
+  width: 100%;
+  text-align: center;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="D:\2x\2x/Next Trip white.png" alt="logo" width=100" height="100" >
+        <div class="search-container">
+          <h2>Search Bus</h2>
+            <input type="text" id="originInput" placeholder="Origin">
+            <input type="text" id="destinationInput" placeholder="Destination">
+            <button id="searchBtn">Search</button>
+        </div>
+    </nav>
+    
+        
+        <div class="dropdown" id="dropdown">
+          <!-- Suggestions will be dynamically added here -->
+          <div class="dropdown-item">
+           <li>bus name</li>
+           <li>bus name</li>
+           <li>bus name</li>
+          </div>
+        </div>
+      
+        <footer>
+          <p>&copy; NextTrip 2024, All rights are reserved.</p>
+        </footer>
+      <script>
+        const originInput = document.getElementById('originInput');
+const destinationInput = document.getElementById('destinationInput');
+const searchBtn = document.getElementById('searchBtn');
+const dropdown = document.getElementById('dropdown');
+
+// Sample data for suggestions
+const suggestions = [
+  { bus:'jayaraj Travelers', origin: 'BC Road', destination: 'Moodabidri', time: '2:30pm', km: '40' },
+  { bus:'Ballal Travelers', origin: 'BC Road', destination: 'Moodabidri', time: '3:30pm', km: '40' },
+  { bus:'Ballal Travelers', origin: 'BC Road', destination: 'Moodabidri', time: '3:30pm', km: '40' },
+  { bus:'Gloria Travelers',origin: 'Moodabidri', destination: 'BC Road', time: '3:00pm', km: '40' },
+  { bus:'Vailankani Travelers',origin: 'BC Road', destination: 'Venur', time: '2:30pm', km: '50' },
+  { bus:'jayaraj Travelers',origin: 'BC Road', destination: 'Venur', time: '4:30pm', km: '50' }
+  // Add more suggestions as needed
+];
+
+// Event listener for search button click
+searchBtn.addEventListener('click', handleSearch);
+
+// Event listener for clicks outside the dropdown to close it
+document.addEventListener('click', closeDropdown);
+
+function handleSearch() {
+  const origin = originInput.value.toLowerCase();
+  const destination = destinationInput.value.toLowerCase();
+
+  // Filter suggestions based on the input
+  const filteredSuggestions = suggestions.filter(item =>
+    item.origin.toLowerCase().includes(origin) &&
+    item.destination.toLowerCase().includes(destination)
+  );
+
+  // Update the dropdown with filtered suggestions
+  updateDropdown(filteredSuggestions);
+}
+
+function updateDropdown(suggestions) {
+  // Clear previous suggestions
+  dropdown.innerHTML = '';
+
+  // Display the dropdown if there are suggestions
+  if (suggestions.length > 0) {
+    suggestions.forEach(item => {
+      const dropdownItem = document.createElement('div');
+      dropdownItem.className = 'dropdown-item';
+      dropdownItem.innerHTML = `<b>Bus Name: </b>${item.bus} <br> <b>Origin: </b>${item.origin} <br> <b>Destination</b>  ${item.destination} <br> <b>Time :</b>${item.time} <br> <b>KM: </b>${item.km}<br> <button class="pay-button" onclick="redirectToPayTicket()">Buy Ticket</button><button class="review"  onclick="openReviewPopup()">Review Bus</button>`;
+      
+      
+      // Handle click on a suggestion
+      dropdownItem.addEventListener('click', () => {
+        originInput.value = item.origin;
+        destinationInput.value = item.destination;
+        closeDropdown();
+      });
+
+      dropdown.appendChild(dropdownItem);
+    });
+
+    // Display the dropdown
+    dropdown.style.display = 'block';
+   
+  } else {
+    // Hide the dropdown if there are no suggestions
+    dropdown.style.display = 'none';
+  }
+}
+
+function closeDropdown() {
+  // Hide the dropdown when clicking outside the search container
+  if (!event.target.closest('.search-container')) {
+    dropdown.style.display = 'none';
+  }
+}
+
+
+// Geting the search data from home page
+const urlParams = new URLSearchParams(window.location.search);
+    const fromPlace = urlParams.get('from_place');
+    const toPlace = urlParams.get('to_place');
+
+    // Use the values in your search results page
+    document.getElementById('originInput').value = fromPlace;
+    document.getElementById('destinationInput').value = toPlace;
+
+//program to redirect the payticket page
+function redirectToPayTicket() {
+  // Get the necessary data before redirecting, if needed
+  const selectedOrigin = originInput.value;
+  const selectedDestination = destinationInput.value;
+
+  // Redirect to payticket.html with the selected origin and destination
+  window.location.href = `payticket.html?origin=${encodeURIComponent(selectedOrigin)}&destination=${encodeURIComponent(selectedDestination)}`;
+}
+
+//function to open the review popup
+function openReviewPopup() {
+  // Create the review popup
+  const reviewPopup = document.createElement('div');
+  reviewPopup.className = 'review-popup';
+
+  // Add stars, text box, and submit button to the popup
+  reviewPopup.innerHTML = `
+                          
+    <span class="close-btn" onclick="closeReviewPopup()">&times;</span>
+    <h2 class="writerev">Write a Review</h2><br> 
+    <h4 class="busname">Bus Name: Jayaraj Travels</h4>
+    <div class="stars-container">
+      <span class="star" onclick="rateStar(1)">&#9733;</span>
+      <span class="star" onclick="rateStar(2)">&#9733;</span>
+      <span class="star" onclick="rateStar(3)">&#9733;</span>
+      <span class="star" onclick="rateStar(4)">&#9733;</span>
+      <span class="star" onclick="rateStar(5)">&#9733;</span>
+    </div>
+    <textarea id="reviewTextarea" class="review-textbox" placeholder="Write your review..."></textarea>
+    <button class="submit-btn" onclick="submitReview()">Submit Review</button>
+  `;
+
+  // Append the popup to the body
+  document.body.appendChild(reviewPopup);
+}
+
+function closeReviewPopup() {
+  // Remove the review popup
+  const reviewPopup = document.querySelector('.review-popup');
+  if (reviewPopup) {
+    reviewPopup.remove();
+  }
+}
+
+function rateStar(star) {
+  // Implement star rating logic as needed
+  const stars = document.querySelectorAll('.star');
+  stars.forEach((s, index) => {
+    s.classList.toggle('active', index < star);
+  });
+}
+
+function submitReview() {
+  // Implement logic to submit the review
+  // You can retrieve the review text and star rating using the DOM
+  const reviewText = document.getElementById('reviewTextarea').value;
+  const stars = document.querySelectorAll('.star.active').length;
+
+  // Display or send the review data as needed
+  console.log('Review Text:', reviewText);
+  console.log('Star Rating:', stars);
+
+  // Close the review popup after submission
+  closeReviewPopup();
+}
+  
+
+      </script>
+</body>
+</html>

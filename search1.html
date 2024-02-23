@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            background: linear-gradient(to right, #f127e6, #f5af19);
+            color: white;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: white;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .card-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background: white;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .stop-details {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center mt-4">Available Buses</h1>
+    <div class="container">
+        <div class="row">
+            {% if trips %}
+                {% for trip in trips %}
+                    <div class="col-md-6">
+                        <div class="card">
+                            <!-- <img src="{{ trip.image }}" alt="Bus Image" class="card-image"> -->
+                            <div class="card-body">
+                                <h5 class="card-title">Trip {{ forloop.counter }}</h5>
+                                <p class="card-text">Bus Number: {{ trip.route.bus.number }}</p>
+                                <p class="card-text">Bus Name: {{ trip.route.bus.name }}</p>
+                                <p class="card-text">Reg Number: {{ trip.route.bus.reg_number }}</p>
+                                <p class="card-text">Departure Time: {{ trip.departure_time }}</p>
+                                <p class="card-text">Distance: {{ trip.route.distance }}</p>
+                                <p class="card-text">Cost: {{ trip.route.cost }}</p>
+                            </div>
+                            <div class="card-badge">Stops: {{ trip.stops|length }}</div>
+                            <button class="card-button" onclick="toggleStopDetails(this)">Show Stops</button>
+                            <div class="stop-details">
+                                <h5>Stops for Trip {{ forloop.counter }}</h5>
+                                <ul>
+                                    {% for stop in trip.stops %}
+                                        <li>{{ stop.station }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No buses found for the specified route.</p>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        function toggleStopDetails(button) {
+            var stopDetails = button.nextElementSibling;
+            if (stopDetails.style.display === "block") {
+                stopDetails.style.display = "none";
+                button.textContent = "Show Stops";
+            } else {
+                stopDetails.style.display = "block";
+                button.textContent = "Hide Stops";
+            }
+        }
+    </script>
+</body>
+</html>
