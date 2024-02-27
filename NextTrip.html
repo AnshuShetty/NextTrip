@@ -22,14 +22,16 @@
             <li><a class="nav-link" aria-current="page" href="#" id="active" onclick="setActive(this)">Home</a></li>
             <li><a class="nav-link" href="#Searchbus" onclick="setActive(this)">Search Bus</a></li>
             <li><a class="nav-link" href="#about" onclick="setActive(this)">About us</a></li>
+            <li><a class="nav-link" href="#" onclick="setActive(this)">Buy  Ticket</a></li>
             <li><a class="nav-link" href="#contactus" onclick="setActive(this)">Contact US</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-user"></i>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                <li><a class="dropdown-item" href="#">Ticket History</a></li>
                 <li><a class="dropdown-item" href="#">Admin Login</a></li>
+                <li><a class="dropdown-item" href="#">Sign Out</a></li>
               </ul>
             </li>
             <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
@@ -75,41 +77,69 @@
               <img src="https://assets.volvo.com/is/image/VolvoInformationTechnologyAB/maroon-bus?qlt=82&wid=1024&ts=1660222495591&dpr=off&fit=constrain" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Jayaraj Travels</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Jayaraj Travels run from Moodabidri to BC Road.</p>
               </div>
             </div>
             <div class="card" style="width: 18rem;">
               <img src="https://assets.volvo.com/is/image/VolvoInformationTechnologyAB/blue-bus?qlt=82&wid=1024&ts=1660212095501&dpr=off&fit=constrain" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">VailankaniTravels</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Vailankani Travels run from Moodabidri to BC Road..</p>
               </div>
             </div>
             <div class="card" style="width: 18rem;">
               <img src="https://assets.volvo.com/is/image/VolvoInformationTechnologyAB/1860x1050-volvo-9700-CGI1?qlt=82&wid=1024&ts=1656931444230&dpr=off&fit=constrain" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">GloriaTravels</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Gloria Travels run from Moodabidri to BC Road.</p>
               </div>
             </div>
             <div class="card" style="width: 18rem;">
               <img src="https://www.forefronttours.com/wp-content/uploads/2019/05/volvo_bus.jpg" alt="...">
               <div class="card-body">
-                <h5 class="card-title">GloriaTravels</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 class="card-title">Dakshith</h5>
+                <p class="card-text">Dakshith Travels run from Mangalore to Puttur.</p>
               </div>
             </div>
             <div class="card" style="width: 18rem;">
               <img src="https://www.lectura-specs.com/models/renamed/orig/touring-coaches-9700-volvo-buses.jpg" alt="...">
               <div class="card-body">
                 <h5 class="card-title">MahaGanesh Travels</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">MahaGanesh Travels run from Moodabidri to BC Road.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <section id="query">
+        <div id="queryModal" class="modal">
+
+          <div class="modal-content">
+            <span class="close" onclick="closeQueryForm()">&times;</span>
+            <h2>Query Form</h2>
+            <form action="#" method="post">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required>
+          
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+          
+              <label for="message">Message:</label>
+              <textarea id="message" name="message" rows="4" required></textarea>
+          
+              <label for="phone">Phone Number:</label>
+              <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Enter 10-digit phone number" required>
+          
+              <button type="submit">Submit</button>
+            </form>
+          
+          </div>
+        </div>
+      </section>
+      <!-- <div class="query">
+        <i class="fa-regular fa-comment" onclick="openQueryForm()"></i>
+      </div> -->
       <section id="contactus">
         <footer>
           <div class="container-footer">
@@ -124,7 +154,7 @@
                   <li>Gloria Travelers</li>
                   <li>Vailankani Travelers</li>
                   <li>MahaGanesh Travelers</li>
-                  <li>Shubhalaxmi Travelers</li>
+                  <li>Dakshith Travelers</li>
                 </ul>
               </div>
               <div class="location">
@@ -162,8 +192,8 @@
               <div class="contact">
                 <p>For any queries or help Contact</p>
                                <p class="continfo"><i class="fa-solid fa-phone"></i>+91 8217406323</p>
-                               <p class="continfo"><i class="fa-solid fa-envelope"></i> anshushetty2003@gmail.com</p>
-              </div>
+                               <p class="continfo" onclick="openQueryForm()"><i class="fa-solid fa-envelope"></i> nexttrip_asrs@gmail.com</p>
+                              </div>
             </div>
             <p>&copy;2024 All rights reserved | Designed and Developed by <b>Anshu</b> and <b>Rakshan</b>
           </div>
