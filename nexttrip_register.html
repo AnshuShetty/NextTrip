@@ -18,7 +18,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100%;
             margin: 0;
             background:linear-gradient(to bottom, #2B0087, rgba(49, 11, 21, 0.555)),url(https://t4.ftcdn.net/jpg/02/74/33/85/360_F_274338583_CuXr9eaYrzH8B0AvGywzEAyWZ2fFopzq.jpg);
             background-repeat: no-repeat;
@@ -31,7 +31,7 @@
             background-color: transparent;
             backdrop-filter: blur(10px);
             width: 600px;
-            padding: 30px;
+            /* padding: 10px; */
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(214, 209, 209, 0.685);
@@ -82,22 +82,32 @@
             <h2>Register</h2>
             <form action="" id="registerForm">
                 
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Name</label>
-                      <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" >
-                      
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" name="email" id="exampleInputEmail2" aria-describedby="emailHelp" >
-                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" name="password" id="exampleInputPassword1">
-                      <span>Show Password<input type="checkbox" onclick="showPass()" id="showPasswordButton"></span>
-                      <span id="passwordError"></span>
-                    </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail2" aria-describedby="emailHelp" >
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  </div>
+                
+                
+
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+                    <span>Show Password<input type="checkbox" onclick="showPass()" id="showPasswordButton"></span>
+                    <span id="passwordError"></span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="Confirm-password" id="exampleInputConfirmPassword">
+                    <span id="passwordError"></span>
+                  </div>
+                
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Contact</label>
                       <input type="tel" class="form-control" name="Contact"id="exampleInputPassword2" >
