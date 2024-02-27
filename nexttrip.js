@@ -34,13 +34,6 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function() {
-  $('.nav-link').click(function(e) {
-    e.preventDefault();
-    $('.nav-link').removeClass('active');
-    $(this).addClass('active');
-  });
-});
 
 function setActive(clickedElement) {
   // Remove 'active' class from all nav items
@@ -53,7 +46,26 @@ function setActive(clickedElement) {
   // Set the color of the active nav item to white
   clickedElement.style.color = 'white';
 }
-      
+
+
+//query added
+function openQueryForm() {
+  var modal = document.getElementById("queryModal");
+  modal.style.display = "block";
+}
+
+function closeQueryForm() {
+  var modal = document.getElementById("queryModal");
+  modal.style.display = "none";
+}
+
+// Close the modal if the user clicks outside the modal content
+window.onclick = function (event) {
+  var modal = document.getElementById("queryModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
 
 // const intro = document.querySelector(".intro");
 
