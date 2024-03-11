@@ -40,11 +40,14 @@
     display: flex;justify-content: space-between;
     align-items: center;
 }
+
+/* added new transition on hover */
 .navbar-nav  li :hover{
     /* border: 1px solid red; */
     background-color: rgb(255, 8, 8);
     padding-bottom: 10px;
     color: white;
+    transition: background-color 0.3s ease-in-out; /* Add transition property */
 }
 
 .navbar button{
@@ -58,7 +61,6 @@
     background-color: #050608;
     border: 1px solid orange;
     border-radius: 20px;
-    box-shadow: 0 0 10px rgba(187, 186, 186, 0.685);
 }
 .container-lg .container-fluid img{
     width: 50%;
@@ -97,19 +99,20 @@ form label{
     position: relative;
     max-width: 100%;
     height: 100%;
-    margin-top: 140px;
     /* border: 1px solid white; */
 }
+
 .home{
     max-width: 100%;
     height: 100%;
 }
 .home img{
     width: 100%;
-  height: 80vh;
+  height: 100vh; /*made the height to 100vh so it looks nice*/
   background-size: cover;
   filter: brightness(40%);
 }
+
 .home p{
     position: absolute;
     padding: 10px;
@@ -134,6 +137,36 @@ form input{
     border-radius: 8px;width: 100%;
     padding: 10px;color: rgb(255, 115, 0);
 }
+
+/* newly added icon css */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+input[type="text"], input[type="date"], input[type="time"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  
+}
+
+i.fa-location-dot, .fa-location-arrow {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #ff9100;
+}
+
+.fa-clock, .fa-calendar{
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  color: #ff9100;
+}
+
 .date-time{
     display: flex;
 }
@@ -357,22 +390,24 @@ footer .social{
 .aboutus{
     margin-top: 3rem;
     padding: 10px;
-    background-color: #0a0a0c;
 }
 .aboutus .cards{
     display: flex;
     gap: 20px; /* Adjust gap between cards as desired */
     overflow-x: hidden; /* Enable horizontal scrolling */
     overflow-y: hidden;
-    transition: transform 0.2s ease-in-out; /* Add a smooth transition effect */
+    
     backface-visibility: hidden;
 }
 .card{
     border-radius: 10px;
+    transition: transform 0.2s ease-in-out; /* Add a smooth transition effect */
 }
+
+/* updated the new css hover and border */
 .aboutus .card:hover {
-    transform: scale(1.08); /* Add slight scale on hover */
-    box-shadow: 0 0 20px rgb(255, 94, 0);
+    transform: translateY(20px);
+    border: 3px solid red;
 }
 
 .aboutus h2{
@@ -505,54 +540,64 @@ footer .social{
   button:hover {
     background-color: #45a049;
   }
-  /* .contact button{
-    transform: rotate(20deg); 
-  }
-  .query{
+
+/* css for preloader */
+#preloader {
     position: fixed;
-    bottom: 5%;
+    top: 0;
     left: 0;
-    background:linear-gradient(60deg,red,orange);
-    padding: 10px;
-    border-radius:0 10px;
-  }
-  .query i{
-    color: white;
-    font-size: 30px;
-  } */
-/* .carousel-container {
-    position: relative;
     width: 100%;
-    max-width: 600px; 
-    margin: auto;
-    overflow: hidden;
-  }
-  
-  .carousel-slide {
+    height: 100%;
+    background: #111111;
     display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#loader {
+    border: 8px solid #ff9898cb;
+    border-top: 8px solid #ff0000;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* thankyou badge css */
+.thankyou-badge {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #28a745; /* Green background color */
+  color: #fff; /* White text color */
+  border-radius: 10px;
+  text-align: center;
+  font-size: 24px;
+  z-index: 1000;
+}
   
-  img {
-    width: 100%;
-  }
-  
-  .prev-btn, .next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .prev-btn {
-    left: 10px;
-    
-  }
-  
-  .next-btn {
-    right: 10px;
-  } */
+/* registered div css */
+.registered{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+.registered img{
+  width: 20%;
+  height: 20%;
+  float: right;
+}
+.registered p{
+  font-size: 50px; font-weight: bold;text-align: center;width: 50%;
+}
