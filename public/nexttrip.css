@@ -1,0 +1,603 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.body{
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: #0b0b0f;
+    width: 100%;
+   
+}
+
+.navbar{
+    /* display: none; */
+    background: linear-gradient(to right,#0b0b0f,#0b0b0f );
+    /* border-bottom: 1px solid red; */
+    width: 100%;
+    color: white;
+}
+.navbar-brand img{
+    margin-left: 10px;
+}
+.navbar-nav .nav-link {
+    text-align: center;
+    margin: 20px;
+    color: white;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.active{
+    text-align: center;
+    margin: 20px;
+    color: white;
+    background-color: rgb(255, 0, 0);
+    border-radius: 10px;    
+}
+
+.container-fluid{
+    display: flex;justify-content: space-between;
+    align-items: center;
+}
+
+/* added new transition on hover */
+.navbar-nav  li :hover{
+    /* border: 1px solid red; */
+    background-color: rgb(255, 8, 8);
+    padding-bottom: 10px;
+    color: white;
+    transition: background-color 0.3s ease-in-out; /* Add transition property */
+}
+
+.navbar button{
+    border: 1px solid white;
+    background-color: antiquewhite;
+}
+.search{
+    margin-top: 5%;
+    padding: 3%;
+    width: 100vh;
+    background-color: #050608;
+    border: 1px solid orange;
+    border-radius: 20px;
+}
+.container-lg .container-fluid img{
+    width: 50%;
+    height: 90%;
+}
+ h3{
+    position: absolute;
+    z-index: 1;
+    top: 8%;
+    left: 0;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+h4{
+    text-align: center;
+    color: orangered;
+    font-size: 30px;
+    font-weight: 600;
+}
+form{
+    width: 100%;
+    padding: 10px;
+    
+}
+form label{
+    color: white;
+}
+.navbar .container {
+    display: flex;
+    justify-content: space-between; width: 100%;
+    /* flex-wrap: wrap; */
+}
+.container-lg{
+    position: relative;
+    max-width: 100%;
+    height: 100%;
+    /* border: 1px solid white; */
+}
+
+.home{
+    max-width: 100%;
+    height: 100%;
+}
+.home img{
+    width: 100%;
+  height: 100vh; /*made the height to 100vh so it looks nice*/
+  background-size: cover;
+  filter: brightness(40%);
+}
+
+.home p{
+    position: absolute;
+    padding: 10px;
+    top: 20%;
+    left: 0;
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    font-weight: bolder;
+    /* animation: typing 5s steps(40, end) forwards; */
+  }
+
+/* @keyframes typing { from { width: 0; } to { width: 100%; } }
+.search label{
+    color: rgb(226, 225, 225);
+} */
+form input{
+    background-color: transparent;
+    margin-bottom: 20px;
+    height: 45px;
+    border: 2px solid rgb(255, 184, 144);
+    outline: none;
+    border-radius: 8px;width: 100%;
+    padding: 10px;color: rgb(255, 115, 0);
+}
+
+/* newly added icon css */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+input[type="text"], input[type="date"], input[type="time"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  
+}
+
+i.fa-location-dot, .fa-location-arrow {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #ff9100;
+}
+
+.fa-clock, .fa-calendar{
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  color: #ff9100;
+}
+
+.date-time{
+    display: flex;
+}
+[type~="date"]{
+    color: orangered;
+    font-weight: bold;
+    margin: 10px;
+}
+[type~=time]{
+    color: orangered;
+    margin: 10px;
+}
+[type~=button]{
+    background: linear-gradient(orange, rgb(255, 102, 0));outline: none;border: 0;
+    color: white;font-size: 20px;
+}
+.collapse{
+    display: flex;
+    justify-content: space-around;
+}
+span{
+    color: red;
+    font-weight: bold;
+}
+footer{
+    background-color: #000000;
+    max-width: 100%;
+    margin-top: 50px;
+}
+footer .logo{
+    width: 50%;
+}
+
+footer p{
+    color: rgb(255, 145, 0);text-align: center;
+    padding: 10px;
+}
+footer .list{
+    margin-top: 40px;
+    display: grid;
+    justify-content: center;
+}
+.list p{
+    font-weight: bold;text-align: center;color: orange;
+}
+.list li{
+    text-align: left;
+    list-style: none;
+    color: white;
+    line-height: 30px;
+    cursor: pointer;
+}
+footer .first-col ul :hover{
+    color: orange;
+}
+footer .location{
+    margin-top: 40px;
+    display: grid;
+    justify-content: center;
+}
+.first-col .location p{
+    font-weight: bold;
+    text-align: center;color: orange;
+}
+.location li{
+    text-align: left;
+    list-style: none;
+    color: white;
+    line-height: 30px;
+    cursor: pointer;
+}
+.first-col{
+    max-width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.first-col .logo img{
+    width: 35%;height: 90%;
+    margin-left: 50px;
+}
+.features{
+    margin-top: 40px;
+    display: grid;
+    justify-content: center;
+}
+.features p{
+    color: orange;
+    font-weight: bold;
+    text-align: center;
+}
+.features li{
+    text-align: left;
+    list-style: none;
+    color: white;
+    line-height: 30px; 
+    cursor: pointer;
+}
+footer .social{
+    padding: 10px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.social .soci-ico{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+}
+.social a {
+    margin: 10px;
+    color: white;
+
+}
+.soci-ico i{
+    font-size: 40px;
+    padding: 10px;
+}
+.social p{
+    font-size: 20px; font-weight: bold;text-align: center;color: orange;
+}
+.soci-ico a :hover{
+    background-color: white; color: black;
+    border-radius: 10px;
+}
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: linear-gradient(orange,rgb(255, 65, 52));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f1d5d5;
+  }
+  
+  /* For Firefox */
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: #ff5100 #ffb006;
+  }
+  
+  /* For IE and Edge */
+  body {
+    -ms-overflow-style: none;
+  }
+  
+  body::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: linear-gradient(orange,rgb(255, 65, 52));
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 5px;
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+    background: #660000;
+  }
+  
+  .home {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  .home h3 {
+    border-right: 0.15em solid;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(40, end) forwards;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+.contfollow{
+    display: flex;
+    justify-content: space-evenly;
+    background:linear-gradient(120deg,black, rgb(10, 11, 15));
+}
+.contact {
+    margin-top: 5px;padding: 4px;
+}
+.contact i{
+    color: orange;
+    font-weight: bold;padding: 10px;
+    float: left;
+}
+.contact p{
+    margin: 10px; color: orange;
+    font-weight: bold;
+}
+.contact .continfo {
+    color: white;
+    margin: 0;
+    font-weight: lighter;
+}
+.contfollow .contact p:nth-child(3):hover {
+    text-decoration: underline;
+    color: orange; /* Set the color of the underline to orange */
+    cursor: pointer; /* Optional: Add a pointer cursor for better user feedback */
+  }
+.aboutus{
+    margin-top: 3rem;
+    padding: 10px;
+}
+.aboutus .cards{
+    display: flex;
+    gap: 20px; /* Adjust gap between cards as desired */
+    overflow-x: hidden; /* Enable horizontal scrolling */
+    overflow-y: hidden;
+    
+    backface-visibility: hidden;
+}
+.card{
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out; /* Add a smooth transition effect */
+}
+
+/* updated the new css hover and border */
+.aboutus .card:hover {
+    transform: translateY(20px);
+    border: 3px solid red;
+}
+
+.aboutus h2{
+    text-align: center;
+    color: orange;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    background: linear-gradient(56deg,orange,rgb(255, 65, 52));
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 20px;
+}
+.aboutus p{
+    width: 100%;
+    color: white;
+}
+.aboutus .card-text{
+    color: black;
+    text-align: justify;
+}
+.aboutus .card-title{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.card:nth-child(1) .card-title {
+    color: blue; /* Set text color to white */
+  }
+  
+  .card:nth-child(2) .card-title {
+    color: #810248; /* Set text color to white */
+  }
+  .card:nth-child(3) .card-title {
+    color: #520281; /* Set text color to white */
+  }
+  .card:nth-child(4) .card-title {
+    color: #cc6d00; /* Set text color to white */
+  }
+  .card:nth-child(5) .card-title {
+    color: #810248; /* Set text color to white */
+  }
+.aboutus .card img{
+    border-radius: 20px;
+}
+
+
+/* dropdown */
+.dropdown-menu {
+    margin: 0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .dropdown-item {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    color: #141414;
+  }
+  
+  .dropdown-item:hover {
+    color: #f5f5f5;
+  }
+/* this is the help form css */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background dim */
+  }
+  
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 500px;
+  }
+  .modal-content h2{
+    color: red;text-align: center;
+  }
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .modal-content form {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+ .modal-content label {
+    margin-bottom: 8px;
+    color: black;
+  }
+  
+  .modal-content input, button {
+    margin-bottom: 16px;
+    padding: 8px;
+    border: 1px solid #1f1f1f;
+    border-radius: 4px;
+  }
+  
+  .modal-content button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+  }
+  .modal-content input{
+    margin-left: 50;
+    margin-right: 50;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+
+/* css for preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#loader {
+    border: 8px solid #ff9898cb;
+    border-top: 8px solid #ff0000;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* thankyou badge css */
+.thankyou-badge {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #28a745; /* Green background color */
+  color: #fff; /* White text color */
+  border-radius: 10px;
+  text-align: center;
+  font-size: 24px;
+  z-index: 1000;
+}
+  
+/* registered div css */
+.registered{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+.registered img{
+  width: 20%;
+  height: 20%;
+  float: right;
+}
+.registered p{
+  font-size: 50px; font-weight: bold;text-align: center;width: 50%;
+}

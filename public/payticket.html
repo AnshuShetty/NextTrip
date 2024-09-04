@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Ticket</title>
+    <link rel="shortcut icon" type="image/png" href="D:\2x\2x/NT.png" />
+    <script src="https://kit.fontawesome.com/feaa59adcb.js" crossorigin="anonymous"></script>
+    <style>
+        * {box-sizing: border-box;}
+        body{
+            min-width: 100svh;
+            background-color: #0b0b0f;
+            /* background: url(https://i0.wp.com/www.traveldiaryparnashree.com/wp-content/uploads/2020/05/travel-landscape-01.jpg?ssl=1); */
+            background-size: cover;
+            /* filter: brightness(20%); */
+            height: 100vh;
+        }
+        header nav{
+            width: 100%;
+        }
+        .container-fluid {
+            max-width: 100%;
+            height: 100vh;
+        }
+        .container-fluid img{
+            background-size: cover;
+            width: 100%;
+            /* filter: brightness(70%); */
+        }
+        .logo{
+            width: 100%;display: flex;justify-content: center;
+        }
+        .logo img{
+            padding: 0;margin: 0;
+            width: 10%; height: 60%;
+            display: flex; justify-content: center;
+        }
+        .heading h3{
+            font-family:'Arial', sans-serif;font-size: 40px; text-align: center;font-weight: bold;
+            background:linear-gradient(to right, #ff4242, #ff0d49, #07116d);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+        }
+        .details{
+            display: flex;
+            justify-content: space-around;align-items: center;
+        }
+        .bus-det ul li{
+            color: white;
+            list-style: none;
+            line-height: 50px;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .details .scan{
+            width: 50%;height:50%;
+            display: grid;justify-content: center;align-items: center;
+        }
+        .scan p{
+            color: white;text-align: center;font-weight: bold;
+        }
+        .scan img{
+            width: 50%;
+            height: 50%;
+        }
+        .details .scan  img{
+            width: 70%;height: 70%;
+            box-shadow: 0 0 10px rgb(0, 0, 0);
+        }
+        .pay{
+            width: 100%;
+           
+            display: flex;justify-content: center;
+        }
+        .pay button{
+            height: 40px; width: 30%;
+            border: 0;outline:none;
+            background-color: rgb(43, 168, 43);color: white;border-radius: 5px; font-weight: bold;
+            font-size: 25px;
+            margin-top: 10px;
+        }
+        .pay  :hover{
+            background-color: rgb(90, 209, 90);cursor: pointer;
+        }
+        span{
+            background:linear-gradient(to right, #ff4242, #ff0d49);
+            /* -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; */
+            padding: 10px;
+            border-radius: 6px;
+            
+        }   
+        footer{
+            margin-top: 20px;
+            background-color: #000000;
+            color:white;
+            width: 100%;
+            height: auto;
+            padding: 10px;
+        }
+        footer p{
+            width: 100%;text-align: center;font-size: 18px;
+            background:linear-gradient(60deg, #ff4242, #ff0d6a);
+             -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+        }
+        ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: linear-gradient(orange,rgb(255, 65, 52));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #ff0644;
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f1d5d5;
+  }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="D:\2x\2x/Next Trip white.png" alt="logo" >
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        
+        <div class="heading">
+            <h3><i class="fa-solid fa-ticket"></i>  Booking Details</h3>
+        </div>
+        <div class="details">
+            <div class="bus-det">
+
+                <ul>
+                    <li><span>Bus Name:</span> Jayaraj Travelers</li>
+                    <li><span>Bus Number:</span> KA19 HCXX12</li>
+                    <li><span>Origin:</span> BC Road</b></li>
+                    <li><span>Destination:</span> Moodabidri</li>
+                    <li><span>Time:</span> 2:30PM</li>
+                    <li><span>Day:</span> Saturday</li>
+                </ul>
+            </div>
+            <div class="scan">
+                <p>Scan to pay</p>
+                <center><img src="https://media.istockphoto.com/id/1095468748/vector/qr-code-abstract-vector-modern-bar-code-sample-for-smartphone-scanning-isolated-on-white.jpg?s=612x612&w=0&k=20&c=Jnh2TAkAFm7QpaBgCyCuGbCA6nomDfk4-XiTsBhbHFk=" alt="Qr code"></center>
+            </div>
+        </div>
+        <div class="pay">
+            <button type="button">Pay</button>
+        </div>
+        <footer>
+           <p> &copy; NextTrip.com | All rights reserved.</p>
+        </footer>
+    </div>
+    <!-- QR code scanner -->
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src='https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js'></script>
+</body>
+</html>
