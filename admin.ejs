@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextrip Admin</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container {
+    padding: 2rem;
+}
+
+.section {
+    background-color: #fff;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+    margin-top: 0;
+}
+
+.add-btn, .submit-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.add-btn:hover, .submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.form-container {
+    margin-top: 1rem;
+}
+
+.form-container input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+    .navbar button{
+        border: none; outline: none; background-color: rgb(15, 165, 100);
+        padding: 10px; border-radius: 5px;
+    }
+    .navbar button a{
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+    }
+    button[type="button"]{
+        background-color: #007bff;
+        padding: 10px;
+        border: none; outline: none;border-radius: 5px; color: white;
+    }
+    button[type="button"]:hover{
+        background-color: #013c7b;
+    }
+
+    /* table styling */
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+.container {
+    padding: 2rem;
+}
+
+.section {
+    background-color: #fff;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.add-btn, .submit-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.add-btn:hover, .submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.form-container {
+    margin-top: 1rem;
+}
+
+.form-container input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="NXT textAsset 1@2x.png" alt="logo" width="150" height="50" >
+        <h1>NextTrip Admin</h1>
+        <button type="button" ><a href="/logout">Logout</a></button>
+    </nav>
+    <div class="container">
+        <div class="section" id="bus-section">
+            <h2>Buses</h2>
+            <button class="add-btn" onclick="toggleBusForm()">Add</button>
+            <form class="form-container" id="bus-form" style="display: none;" method="post" action="/bus">
+                <input type="text" id="bus_no" placeholder="Bus No" name="bus_no">
+                <input type="text" id="bus_name" placeholder="Bus Name" name="bus_name">
+                <input type="text" id="rg_no" placeholder="Registration No" name="rg_no">
+                <input type="text" id="driver_name" placeholder="Driver Name" name="driver_name">
+                <input type="text" id="cond_name" placeholder="Conductor Name" name="cond_name">
+                <input type="number" id="capacity" placeholder="Capacity" name="capacity">
+                <button class="submit-btn" id="submit-bus">Submit</button>
+            </form>
+        </div>
+        <div class="section" id="stops-section">
+            <h2>Stops</h2>
+            <button class="add-btn" onclick="toggleStopsForm()">Add</button>
+            <form class="form-container" id="stops-form" style="display: none;" action="/stop" method="post">
+              <input type="text" id="origin" placeholder="Origin" name="origin" required>
+              <input type="text" id="destination" placeholder="Destination" name="destination" required>
+              
+              <!-- Container for stops -->
+              <div id="stops-container">
+                <div class="stop">
+                  <input type="text" class="stop-name" placeholder="Stop Name" name="stops[0][stop_name]" required>
+                  <input type="number" class="cost-from-origin" placeholder="Cost from Origin" name="stops[0][cost_from_origin]" required>
+                  <input type="number" class="cost-from-previous" placeholder="Cost from Previous Stop" name="stops[0][cost_from_previous]" required>
+                  <input type="time" class="stop_time" placeholder="Stop time" name="stops[0][stop_time]" required>
+                </div>
+              </div>
+                            
+              <button type="button" onclick="addStop()">Add Another Stop</button>
+              <input type="number" id="total_cost" placeholder="Total Cost" name="total_cost" required>
+              <input type="text" class="bus_no" placeholder="Bus no" name="bus_no" required>
+              <button type="submit" class="submit-btn" id="submit-stop">Submit</button>
+            </form>
+          </div>
+    </div>
+    <div class="container">
+        <div class="section" id="bus-section">
+            <h2>Buses</h2>
+            <table id="bus-table">
+                <thead>
+                    <tr>
+                        <th>Bus No</th>
+                        <th>Bus Name</th>
+                        <th>Registration No</th>
+                        <th>Driver Name</th>
+                        <th>Conductor Name</th>
+                        <th>Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Bus details will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        <div class="section" id="stops-section">
+            <h2>Stops</h2>
+            <table id="stops-table">
+                <thead>
+                    <tr>
+                        <th>Origin</th>
+                        <th>Destination</th>
+                        <th>Stops</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Stop details will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        <div class="section" id="queries-section">
+            <h2>Queries</h2>
+            <table id="queries-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Query</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Query details will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/script.js"></script>
+    <script >
+        function toggleBusForm() {
+            const busForm = document.getElementById('bus-form');
+            busForm.style.display = busForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleStopsForm() {
+            const stopsForm = document.getElementById('stops-form');
+            stopsForm.style.display = stopsForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+// document.getElementById('submit-bus').addEventListener('click', function() {
+//     document.getElementById('bus-form').reset();
+//     toggleBusForm();
+// });
+
+
+
+let stopIndex = 1; // To keep track of the stops
+
+function addStop() {
+  const stopsContainer = document.getElementById('stops-container');
+
+  const newStop = document.createElement('div');
+  newStop.className = 'stop';
+  
+  // Creating input fields for new stop
+  newStop.innerHTML = `
+  <input type="text" class="stop-name" placeholder="Stop Name" name="stops[${stopIndex}][stop_name]" required>
+  <input type="number" class="cost-from-origin" placeholder="Cost from Origin" name="stops[${stopIndex}][cost_from_origin]" required>
+  <input type="number" class="cost-from-previous" placeholder="Cost from Previous Stop" name="stops[${stopIndex}][cost_from_previous]" required>
+  <input type="time" class="stop_time" placeholder="Stop time" name="stops[${stopIndex}][stop_time]" required>
+`;
+
+
+  stopsContainer.appendChild(newStop);
+  stopIndex++; // Increment the stop index for the next stop
+}
+
+
+    </script>
+</body>
+</html>
