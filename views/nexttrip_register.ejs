@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="./NT.png" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            background:linear-gradient(to bottom, #2B0087, rgba(49, 11, 21, 0.555)),url(https://t4.ftcdn.net/jpg/02/74/33/85/360_F_274338583_CuXr9eaYrzH8B0AvGywzEAyWZ2fFopzq.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+            width: 100%;
+        }
+        .container{
+            background-color: transparent;
+            backdrop-filter: blur(10px);
+            width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(214, 209, 209, 0.685);
+        }
+        .container form{
+            display: grid;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+        }
+        label{
+            font-size: 17px; font-weight: 600;
+        }
+        input{
+            height: 38px; outline: none; border: 0;
+            padding: 10px; border-radius: 8px; width: 400px;
+        }
+        button{
+            background-color: rgb(35, 184, 35); color: rgb(255, 255, 255); border: 0; outline: none;
+            height: 50px; border-radius: 10px; margin-top: 10px;
+        }
+        img{
+            display: flex; justify-content: center;
+        }
+        h2{
+            text-align: center; font-size: 30px; color: rgb(255, 255, 255);
+        }
+        .form-text{
+            color: rgb(231, 225, 225);
+        }
+        span{
+            width: 50%; text-align: center;
+        }
+        form input[type="checkbox"]{
+            height: 15px; font-size: 10px; width: 10% !important; text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./Next Trip white.png" width="150" height="150" alt="Logo">
+        <div class="form">
+            <h2>Registration Form</h2>
+            <form id="registerForm" method="POST" action="/register">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="exampleInputEmail1">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail2">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+                    <span>Show Password<input type="checkbox" onclick="showPass()" id="showPasswordButton"></span>
+                    <span id="passwordError"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="confirm_password" id="exampleInputConfirmPassword">
+                    <span id="passwordError"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="contact" class="form-label">Contact</label>
+                    <input type="tel" class="form-control" name="contact" id="exampleInputPassword2">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        function showPass() {
+            const passwordInput = document.getElementById('exampleInputPassword1');
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        }
+
+       //prevent the form submission if the password and confirm-password both are not match
+       document.getElementById('registerForm').addEventListener('submit', function(event){
+        const password = document.getElementById('exampleInputPassword1').value;
+        const confirmPassword = document.getElementById('exampleInputConfirmPassword').value;
+        if(password !== confirmPassword){
+          event.preventDefault();
+          document.getElementById('passwordError').innerHTML = 'Password and Confirm Password do not match';
+          }
+          });
+        
+
+        // document.getElementById('registerForm').addEventListener('submit', function(event) {
+        //     event.preventDefault();
+        //     const name = document.getElementById('exampleInputEmail1').value;
+        //     const email = document.getElementById('exampleInputEmail2').value;
+        //     const password = document.getElementById('exampleInputPassword1').value;
+        //     const Cpassword = document.getElementById('exampleInputConfirmPassword').value;
+        //     const contact = document.getElementById('exampleInputPassword2').value;
+
+        //     if (password !== Cpassword) {
+        //         alert('Passwords do not match.');
+        //         return;
+        //     }
+
+            // fetch('http://localhost:4000/data/user', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({ Name: name, Email: email, Password: password, Contact: contact })
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log('Success:', data);
+            //     alert('Registration successful!');
+            // })
+            // .catch(error => console.error('Error:', error));
+        // });
+
+        // const registerForm = document.getElementById('registerForm');
+        // registerForm.addEventListener('submit', (event) => {
+        //     event.preventDefault();
+
+        //     const name = document.getElementById('exampleInputEmail1');
+        //     const email = document.getElementById('exampleInputEmail2');
+        //     const password = document.getElementById('exampleInputPassword1');
+        //     const Cpassword = document.getElementById('exampleInputConfirmPassword');
+        //     const contact = document.getElementById('exampleInputPassword2');
+
+        //     if (!name.value || !email.value || !password.value || !Cpassword.value || !contact.value) {
+        //         alert('Please fill in all the fields.');
+        //         return;
+        //     }
+
+        //     // If all fields are filled, you can submit the form data to the server here.
+        //     console.log('Form submitted:', {
+        //         name: name.value,
+        //         email: email.value,
+        //         password: password.value,
+        //         Cpassword: Cpassword.value,
+        //         contact: contact.value
+        //     });
+
+        //     // Clear the form fields
+        //     name.value = '';
+        //     email.value = '';
+        //     password.value = '';
+        //     Cpassword.value = '';
+        //     contact.value = '';
+        // });
+    </script>
+</body>
+</html>
