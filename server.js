@@ -62,9 +62,34 @@ app.get('/forgot', (req, res)=>{
   res.render('Forgot_password');
 });
 
-app.get('/home', (req,res)=>{
-  res.render('NextTrip');
-})
+
+//home route to get home page
+app.get('/home', async (req, res) => {
+  try {
+    // Retrieve the user ID from the session
+    const userId = req.session.userId;
+
+    // If no user is logged in, redirect to the login page
+    if (!userId) {
+      return res.redirect('/login'); // Redirect to login if user is not authenticated
+    }
+
+    // Fetch the user data from the database
+    const user = await User.findById(userId);
+
+    // If the user is not found in the database
+    if (!user) {
+      return res.redirect('/login'); // Redirect to login if user is not found
+    }
+
+    // Render the NextTrip page with the user's name
+    res.render('NextTrip', { userName: user.Name }); // Pass the userName to the template
+  } catch (err) {
+    console.error('Error loading home page:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 
 app.post('/register', async (req, res) => {
@@ -97,7 +122,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-//route for thr login page
+// Route for the login page
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -105,17 +130,21 @@ app.post('/login', async (req, res) => {
     // Find the user by email
     const user = await User.findOne({ Email: email });
 
+    // If the user is not found
     if (!user) {
       return res.status(400).send('Invalid email or password');
     }
 
     // Compare the entered password with the hashed password in the database
-    const isMatch = await bcrypt.compare(password, user.Password);   
+    const isMatch = await bcrypt.compare(password, user.Password);
 
-
+    // If the password does not match
     if (!isMatch) {
       return res.status(400).send('Invalid email or password');
     }
+
+    // Store the user ID in the session after successful authentication
+    req.session.userId = user._id;
 
     // Successful login, redirect to the home page or desired route
     res.redirect('/home'); // Replace '/home' with your desired route
@@ -124,7 +153,6 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
 
 //password resetting
 app.post('/forgot-password', async (req, res) => {
@@ -330,47 +358,66 @@ app.get('/queries', async (req, res) => {
 
 
 // Route to handle form submission
-app.post('/search', (req, res) => {
+app.post('/search', async (req, res) => {
   const { from, to, stop, date, time } = req.body;
-  // Pass the form data to search1.ejs
-  res.render('search1', { from, to, stop, date, time });
-});
-
-
-
-//route to handle the form submisssion of search queries
-// Updated search route
-app.get('/search', async (req, res) => {
-  const { from, to, stop, date, time } = req.query; // Get search parameters from query string
 
   try {
-    // Step 1: Find the relevant stops based on the search criteria
-    const matchingStops = await Stop.find({
+    // Find stops that match the search criteria
+    const matchingStops = await Stop.findOne({
       origin: from,
       destination: to,
-      'stops.stop_name': stop // Check if the stop exists in the stops array
+      stops: { $elemMatch: { stop_name: stop } } // Match the specific stop
     });
 
-    // Step 2: Find all buses available on the found routes using bus_no
-    const busNumbers = matchingStops.map(stop => stop.bus_no); // Extract bus numbers
-    const availableBuses = await Bus.find({ bus_no: { $in: busNumbers } }); // Find buses by their numbers
+    // If no matching stops are found, send an empty array
+    if (!matchingStops) {
+      return res.render('search1', { buses: [], stops: [], from, to, stop, date, time });
+    }
 
-    // Step 3: Render the search results in the search1.ejs page
-    res.render('search1', { 
-      bus: availableBuses, // Pass 'buses' to the template
-      stops: matchingStops,
-      from,
-      to,
-      stop,
-      date,
-      time 
+    // Extract the bus number associated with these stops
+    const busNumbers = [matchingStops.bus_no];
+
+    // If no bus numbers are found, send an empty array
+    if (!busNumbers.length) {
+      return res.render('search1', { buses: [], stops: [], from, to, stop, date, time });
+    }
+
+    // Find the buses corresponding to the stops' bus numbers
+    const buses = await Bus.find({ bus_no: { $in: busNumbers } });
+
+    // Filter stops to only include the relevant ones for the search
+    const relevantStops = matchingStops.stops.filter(s => s.stop_name === stop);
+
+    // Prepare data to send to the view
+    const searchResults = buses.map(bus => {
+      return {
+        busName: bus.bus_name,
+        busNo: bus.bus_no,
+        regNo: bus.rg_no,
+        driverName: bus.driver_name,
+        conductorName: bus.cond_name,
+        capacity: bus.capacity,
+        stops: relevantStops.map(stop => ({
+          stopName: stop.stop_name,
+          costFromOrigin: stop.cost_from_origin
+        }))
+      };
     });
-    console.log('Available Buses:', availableBuses);
-    console.log('Matching Stops:', matchingStops);
+
+    // Render the search1.ejs page with the buses data
+    res.render('search1', { buses: searchResults, from, to, stop, date, time });
   } catch (error) {
-    console.error('Error fetching search results:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error('Error fetching buses:', error);
+    res.status(500).send('Internal Server Error');
   }
+});
+
+app.get('/buyTicket', (req, res) => {
+  // Extract query parameters from the URL
+  const { busNo, busName, driverName, conductorName, capacity, stopName, costFromOrigin, from, to } = req.query;
+
+  // Render the buyTicket page with the extracted data
+  res.render('buyTicket', { busNo, busName, driverName, conductorName, capacity, stopName, costFromOrigin, from , to });
 });
 
 
