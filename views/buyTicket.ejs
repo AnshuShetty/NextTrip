@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Booking</title>
+    <link rel="shortcut icon" type="image/png" href="NT.png" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        nav{
+           display: flex;justify-content: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .total-cost {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .payment-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .payment-button:hover {
+            background-color: #218838;
+        }
+        .back{
+            padding: 10px;
+            background-color: rgb(0, 136, 255);
+            outline: none;border: none;border-radius: 5px;cursor: pointer;
+            color: white;
+        }
+        .back a{
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        
+        <img src="Next Trip.png" alt="logo" width=100" height="100" >
+    </nav>
+    <div class="container">
+        <button class="back" onclick="history.back()">Back</button>
+        <h2>Bus Ticket Booking</h2>
+        <form id="bookingForm">
+            <label for="busName">Bus Name:</label>
+            <input type="text" id="busName" name="busName" value="<%= busName %>" required>
+
+            <label for="busNo">Bus Number:</label>
+            <input type="text" id="busNo" name="busNo" value="<%= busNo %>" required>
+
+            <label for="origin">Origin:</label>
+            <input type="text" id="origin" name="origin" value="<%= from %>" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" value="<%= to %>" required>
+
+            <label for="stopName">Stop Name:</label>
+            <input type="text" id="stopName" name="stopName" value="<%= stopName %>" required>
+
+            <label for="stopTime">Stop Time:</label>
+            <input type="time" id="stopTime" name="stopTime" value="" required>
+            
+            <label for="stopTime">Price from the Stop:</label>
+            <input type="number" id="price" name="price" value="<%= costFromOrigin %>" required>
+
+            <!-- <label for="numPeople">Number of People:</label>
+            <input type="number" id="numPeople" name="numPeople" value="1" min="1" required> -->
+
+            <div class="total-cost" id="totalCost">Total Ticket Price: <%= costFromOrigin %></div>
+
+            <button type="button" class="payment-button" onclick="calculateTotal()">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        const baseCost = 100; // Base cost for one person
+
+        function calculateTotal() {
+            const numPeople = document.getElementById('numPeople').value;
+            const totalCost = baseCost * numPeople;
+            document.getElementById('totalCost').innerText = `Total Cost: ₹${totalCost}`;
+        }
+    </script>
+</body>
+</html>

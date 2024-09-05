@@ -66,7 +66,7 @@ button {
   padding: 10px;
   margin: 5px;
   background-color: #0062ff;
-  color: #000000;
+  color: #f7f7f7;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -185,12 +185,57 @@ footer p{
   width: 100%;
   text-align: center;
 }
+.available-bus {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    margin-top: 10rem;
+}
+
+.available-bus h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.available-bus table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.available-bus th, .available-bus td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.available-bus th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.available-bus tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.available-bus tr:nth-child(odd) {
+    background-color: #e7e7e7;
+}
+
+.available-bus tr:hover {
+    background-color: #f1f1f1;
+}
+
+.available-bus p {
+    text-align: center;
+    color: #666;
+}
+
     </style>
 </head>
 <body>
     <nav>
         <img src="Next Trip.png" alt="logo" width=100" height="100" >
-        <form class="search-container" action="/search" method="get">
+        <form class="search-container" action="/search" method="post">
             <h2>Search Bus</h2>
           <input type="text" id="originInput" placeholder="Origin" value="<%= from %>" name="from">
           <input type="text" id="destinationInput" placeholder="Destination" value="<%= to %>" name="to">
@@ -200,8 +245,9 @@ footer p{
             <button id="searchBtn">Search</button>
         </form>
     </nav>
+    <div class="available-bus">
     <h2>Available Buses</h2>
-    <% if (bus && bus.length > 0) { %>
+    <% if (buses && buses.length > 0) { %>
         <table>
             <thead>
                 <tr>
@@ -210,48 +256,37 @@ footer p{
                     <th>Driver Name</th>
                     <th>Conductor Name</th>
                     <th>Capacity</th>
+                    <th>Stop Name</th>
+                    <th>Ticket Price</th>
+                    <th>Book</th>
                 </tr>
             </thead>
             <tbody>
-                <% buses.forEach(function(bus) { %>
-                    <tr>
-                        <td><%= bus.bus_no %></td>
-                        <td><%= bus.bus_name %></td>
-                        <td><%= bus.driver_name %></td>
-                        <td><%= bus.cond_name %></td>
-                        <td><%= bus.capacity %></td>
-                    </tr>
-                <% }); %>
+              <% buses.forEach(bus => { %>
+                <tr>
+                  <td><%= bus.busNo %></td>
+                  <td><%= bus.busName %></td>
+                  <td><%= bus.driverName %></td>
+                  <td><%= bus.conductorName %></td>
+                  <td><%= bus.capacity %></td>
+                  <% bus.stops.forEach(stop => { %>
+                    <td><%= stop.stopName %></td>
+                    <td><%= stop.costFromOrigin %></td>
+                  <% }) %>
+                  <td><button>
+                    <a href="/buyTicket?busNo=<%= bus.busNo %>&busName=<%= bus.busName %>&driverName=<%= bus.driverName %>&conductorName=<%= bus.conductorName %>&capacity=<%= bus.capacity %>&stopName=<%= bus.stops[0].stopName %>&costFromOrigin=<%= bus.stops[0].costFromOrigin %>&from=<%= from %>&to=<%= to %>" style="text-decoration: none; color: white;">
+                      Book
+                    </a>
+                  </button></td>
+                </tr>
+              <% }) %>
             </tbody>
         </table>
     <% } else { %>
         <p>No buses available for the selected route.</p>
     <% } %>
-    <h2>Stop Details</h2>
-    <% if (stops && stops.length > 0) { %>
-        <table>
-            <thead>
-                <tr>
-                    <th>Stop Name</th>
-                    <th>Cost from Origin</th>
-                    <th>Cost from Previous Stop</th>
-                    <th>Stop Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% stops.forEach(stop => { %>
-                    <tr>
-                        <td><%= stop.stop_name %></td>
-                        <td><%= stop.cost_from_origin %></td>
-                        <td><%= stop.cost_from_previous %></td>
-                        <td><%= stop.stop_time %></td>
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
-    <% } else { %>
-        <p>No stops found for the selected route.</p>
-    <% } %>
+  </div>
+    
     <footer>
         <p>&copy; NextTrip 2024, All rights are reserved.</p>
     </footer>
