@@ -10,18 +10,22 @@ require('dotenv').config();
 const session = require('express-session');
 
 const app = express();
-const port = 3000;
+
+const PORT = process.env.PORT || 5000;
+const dbUrl = process.env.MONGO_URI;
+const secret = process.env.SESSION_SECRET;
+
 
 // Set up session middleware
 app.use(session({
-  secret: 'your-secret-key',
+  secret: secret,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // Set to true if using HTTPS
 }));
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/MiniProject', {
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -434,6 +438,6 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
